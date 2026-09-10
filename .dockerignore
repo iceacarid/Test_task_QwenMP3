@@ -1,0 +1,11 @@
+venv/
+data/
+__pycache__/
+*.pyc
+.git/
+*.mp3
+*.wav
+*.m4a
+transcript.txt
+protocol.json
+protocol.docx

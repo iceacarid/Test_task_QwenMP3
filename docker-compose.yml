@@ -1,0 +1,43 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./prompts:/app/prompts
+      - ./frontend:/app/frontend
+      - ./templates:/app/templates
+      - whisper_cache:/root/.cache/huggingface
+    environment:
+      - OLLAMA_URL=http://ollama:11434/api/chat
+      - QWEN_MODEL=qwen2.5:7b-instruct
+    depends_on:
+      - ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  ollama_models:
+  whisper_cache:

@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+python-multipart
+faster-whisper
+requests
+python-docx
+nvidia-cublas-cu12
+nvidia-cudnn-cu12

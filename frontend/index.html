@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Протокол совещания</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <div class="header">
+      <h1>Аудио → протокол совещания</h1>
+      <p class="subtitle">Загрузите запись совещания</p>
+    </div>
+
+    <label class="dropzone" id="dropzone">
+      <input type="file" id="fileInput" accept=".mp3,.wav,.m4a">
+      <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 16V4M12 4L7 9M12 4l5 5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="dropzone-text">Перетащите файл сюда или нажмите для выбора</span>
+      <span class="dropzone-hint">MP3, WAV, M4A</span>
+    </label>
+
+    <div class="filename" id="filename" hidden>
+      <svg class="filename-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 2v6h6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span id="filenameText"></span>
+    </div>
+    <p class="format-label">Выберите формат протокола</p>
+    <div class="format-select" id="formatSelect">
+      <button type="button" class="format-option active" data-format="docx">DOCX</button>
+      <button type="button" class="format-option" data-format="pdf">PDF</button>
+      <button type="button" class="format-option" data-format="txt">TXT</button>
+    </div>
+
+    <button class="btn btn-primary" id="processBtn" disabled>Обработать</button>
+
+    <div class="progress" id="progress" hidden>
+      <div class="progress-track">
+        <div class="progress-segment" data-segment="transcribing"></div>
+        <div class="progress-segment" data-segment="generating"></div>
+        <div class="progress-segment" data-segment="done"></div>
+      </div>
+      <div class="progress-steps">
+        <span class="progress-step" data-stage="transcribing">Распознавание</span>
+        <span class="progress-step" data-stage="generating">Qwen</span>
+        <span class="progress-step" data-stage="done">Готово</span>
+      </div>
+    </div>
+
+    <div class="status" id="status" hidden></div>
+
+    <button class="btn btn-secondary" id="transcriptToggle" hidden type="button">Показать расшифровку</button>
+    <pre class="transcript" id="transcript" hidden></pre>
+
+    <a class="btn btn-secondary" id="downloadLink" hidden download>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 16V4M12 16l-4-4M12 16l4-4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M4 18v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span id="downloadText">Скачать протокол</span>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
