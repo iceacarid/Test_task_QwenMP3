@@ -1,0 +1,12 @@
+# Запуск БЕЗ видеокарты (или когда GPU нужна другим программам).
+#   docker compose -f docker-compose.yml -f docker-compose.cpu.yml up --build -d
+# Второй файл дополняет основной: `!reset` убирает резервирование GPU у обоих сервисов,
+# а переменные окружения включают CPU-режим в приложении (без попыток занять GPU).
+services:
+  backend:
+    deploy: !reset {}
+    environment:
+      - ASR_DEVICE=cpu
+      - LLM_FALLBACK_LADDER=cpu
+  ollama:
+    deploy: !reset {}

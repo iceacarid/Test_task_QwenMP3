@@ -1,0 +1,14 @@
+venv/
+data/
+__pycache__/
+*.pyc
+.DS_Store
+
+test_audio/
+.claude/
+
+# не входят в репозиторий
+tests/
+tools/
+test_meeting_audio.wav
+test_meeting_audio_protocol.docx
